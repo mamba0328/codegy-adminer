@@ -1,17 +1,28 @@
 require('dotenv').config()
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './index.tsx',
     devtool: 'inline-source-map',
     plugins: [
+        new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
-            title: 'Development',
+            title: 'TinyMCE Webpack Demo',
+            meta: {viewport: 'width=device-width, initial-scale=1'}
         }),
     ],
     module: {
         rules: [
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /skin\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
@@ -29,12 +40,24 @@ module.exports = {
             },
         ],
     },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                tinymceVendor: {
+                    test: /[\\/]node_modules[\\/](tinymce)[\\/](.*js|.*skin.css)|[\\/]plugins[\\/]/,
+                    name: 'tinymce'
+                },
+            },
+        }
+    },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
-        filename: 'main.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'public'),
+        clean: true,
     },
     devServer: {
         static: './public',

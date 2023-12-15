@@ -1,0 +1,41 @@
+import React, { useRef } from 'react';
+import BundledEditor from './components/BundleEditor';
+
+export default function NewPost() {
+    const editorRef = useRef(null);
+    const log = () => {
+        if (editorRef.current) {
+            console.log(editorRef.current.getContent());
+        }
+    };
+    return (
+        <>
+            <BundledEditor
+                onInit={(evt, editor) => editorRef.current = editor}
+                initialValue='<p>I gonna be the very best...</p>'
+                init={{
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                        'advlist',
+                        'anchor',
+                        'autolink',
+                        // 'help', // causes error because plugin is 404
+                        'image',
+                        'link',
+                        'lists',
+                        'searchreplace',
+                        'table',
+                        'wordcount'
+                    ],
+                    toolbar: 'undo redo | blocks | ' +
+                        'bold italic forecolor | alignleft aligncenter ' +
+                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                        'removeformat | help',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                }}
+            />
+            <button onClick={log}>Log editor content</button>
+        </>
+    );
+}
