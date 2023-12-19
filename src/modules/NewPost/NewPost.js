@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import BundledEditor from './components/BundleEditor';
+import BundledEditor from '../../components/BundleEditor';
 
 export default function NewPost() {
     const editorRef = useRef(null);

@@ -9,7 +9,7 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
-            title: 'TinyMCE Webpack Demo',
+            title: 'codegy-adminer',
             meta: {viewport: 'width=device-width, initial-scale=1'}
         }),
     ],
@@ -17,7 +17,7 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
+                use: ["style-loader", "css-loader", 'postcss-loader'],
             },
             {
                 test: /skin\.css$/i,
@@ -57,10 +57,12 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'public'),
-        clean: true,
     },
     devServer: {
         static: './public',
+        compress: true,
+        port: 9000,
+        historyApiFallback: true,
     },
     mode: process.env.MODE,
 };
