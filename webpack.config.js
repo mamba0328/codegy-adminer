@@ -63,6 +63,7 @@ module.exports = {
         compress: true,
         port: 9000,
         historyApiFallback: true,
+        proxy: { "/api/**": { target: process.env.PROXY_TARGET, secure: false }  }
     },
     mode: process.env.MODE,
 };
