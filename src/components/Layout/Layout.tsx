@@ -1,20 +1,20 @@
 import {NavLink, Outlet} from "react-router-dom";
-import React from "react";
+import React, {ReactNode} from "react";
 
-export default function () {
+export default function ():ReactNode {
     return (
         <main className={'grid grid-cols-main'}>
             {/* A "layout route" is a good place to put markup you want to
           share across all the pages on your site, like navigation. */}
             <aside>
                 <nav>
-                    <ul className={'flex flex-col gap-y-2 py-5 px-2'}>
+                    <ul className={'flex flex-col gap-y-2'}>
                         <li>
                             <NavLink to="/"  className={({isActive})=> isActive ? 'underline' : ''}
                             >Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/new-post" className={({isActive})=> isActive ? 'underline' : ''}>About</NavLink>
+                            <NavLink to="/new-post" className={({isActive})=> isActive ? 'underline' : ''}>Create New Post</NavLink>
                         </li>
                     </ul>
                 </nav>
