@@ -40,7 +40,7 @@ function renderPosts(posts:Array<post>):Array<ReactElement> {
     return posts.map(item => {
         const {_id, body, title, status} = item;
         return (
-            <article className={'w-full max-w-[600px] p-3 mb-5 flex flex-col gap-2 rounded-md shadow-2xl cursor-pointer  hover:shadow-inner hover:shadow-indigo-200 transition-shadow'} onClick={() => _id}>
+            <article className={'w-full max-w-[600px] p-3 mb-5 flex flex-col gap-2 rounded-md shadow-2xl cursor-pointer  hover:shadow-indigo-200 transition-shadow'} onClick={() => _id} key={_id}>
                 <div className={'flex justify-between align-middle'}>
                     <h3 className={'text-xl'}>{title}</h3>
                     <span className={`inline-block w-3 h-3 rounded-full ${status === 1 ? 'bg-amber-500' : 'bg-emerald-500'}`}></span>

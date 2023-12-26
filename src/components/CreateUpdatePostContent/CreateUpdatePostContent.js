@@ -1,15 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import BundledEditor from '../../components/BundleEditor';
 
-export default function NewPost() {
-    const editorRef = useRef(null);
-    const log = () => {
-        if (editorRef.current) {
-            console.log(editorRef.current.getContent());
-        }
-    };
+export default function CreateUpdatePostContent(props) {
+    const {onTitleChange, onEditorChange, title, initialEditorValue} = props;
     return (
-        <section className={'flex flex-col gap-5'}>
+        <fieldset className={'flex flex-col gap-5'}>
 
             <div className={'flex flex-col gap-3'}>
                 <label htmlFor={'title'}>
@@ -20,6 +15,8 @@ export default function NewPost() {
                     type={'text'}
                     id={'title'}
                     placeholder={'Enter your post\'s title'}
+                    onChange={onTitleChange}
+                    value={title}
                 />
             </div>
 
@@ -28,10 +25,14 @@ export default function NewPost() {
                     Post content
                 </label>
                 <BundledEditor
-                    onInit={(evt, editor) => editorRef.current = editor}
-                    initialValue='<h3 style="text-align: center;">Sub heading</h3>'
+                    initialValue={initialEditorValue ?? '<h3 style="text-align: center;">Post heading</h3>'}
                     id={'content'}
                     init={{
+                        setup : function(ed){
+                            ed.on('NodeChange', function(e){
+                                onEditorChange(ed.getContent());
+                            });
+                        },
                         height: 500,
                         menubar: false,
                         plugins: [
@@ -54,9 +55,6 @@ export default function NewPost() {
                 />
             </div>
 
-            <div className={'flex flex-col gap-3'}>
-                <button onClick={log}>Log editor content</button>
-            </div>
-        </section>
+        </fieldset>
     );
 }

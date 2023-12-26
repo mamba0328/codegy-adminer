@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root{
+    --red: #c70909;
+}
+
+.red-x::after{
+    content:'';
+
+    display: inline-block;
+    height: 2px;
+    width: 12px;
+    background-color: var(--red);
+
+    position: absolute;
+    right: 7.5px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.red-x::before{
+    content:'';
+
+    display: inline-block;
+    height: 2px;
+    width: 12px;
+    background-color: var(--red);
+
+    position: absolute;
+    right: 7.5px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+}

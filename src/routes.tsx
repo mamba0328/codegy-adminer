@@ -13,6 +13,7 @@ import LoginPage                    from "./modules/LoginPage/LoginPage";
 //      -change status
 //      -change content
 //      -moderate comments
+//TODO: create post
 //FINISH?
 export function AppRouter():ReactNode {
     return (
