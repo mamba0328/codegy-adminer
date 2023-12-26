@@ -1,20 +1,22 @@
 import React, { ReactNode }         from "react";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes}              from "react-router-dom";
 
-import {RequireAuth} from "./components/RequireAuth/RequireAuth";
+import {RequireAuth}                from "./components/RequireAuth/RequireAuth";
 
 import Layout                       from "./components/Layout/Layout"
 import NewPost                      from "./modules/NewPost/NewPost";
 import Page404                      from "./components/Page404/Page404";
 import Home                         from "./modules/Home/Home";
-
+import LoginPage                    from "./modules/LoginPage/LoginPage";
 
 export function AppRouter():ReactNode {
     return (
         <Routes>
             <Route path="/" element={<Layout />}>
-                { unprotectedRoutes() }
                 { protectedRoutes() }
+            </Route>
+            <Route path="/">
+                { unprotectedRoutes() }
             </Route>
         </Routes>
     )
@@ -25,14 +27,14 @@ function protectedRoutes():ReactNode{
     return (
         <>
             <Route index element={
-                // <RequireAuth>
+                <RequireAuth>
                     <Home/>
-                // </RequireAuth>
+                </RequireAuth>
             }/>
             <Route path={'new-post'} element={
-                // <RequireAuth>
+                <RequireAuth>
                     <NewPost/>
-                // </RequireAuth>
+                </RequireAuth>
             }/>
         </>
     )
@@ -41,6 +43,9 @@ function protectedRoutes():ReactNode{
 function unprotectedRoutes():ReactNode{
     return (
         <>
+            <Route path={'sign-in'} element={
+                <LoginPage/>
+            }/>
             <Route path={'*'} element={
                 <Page404/>
             }/>

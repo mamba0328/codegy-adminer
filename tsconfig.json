@@ -10,5 +10,12 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": true,
+    "lib": [
+      "decorators",
+      "dom",
+      "es5",
+      "scripthost",
+      "dom"
+    ]
   }
 }
