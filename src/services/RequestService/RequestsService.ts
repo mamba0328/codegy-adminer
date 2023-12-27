@@ -6,12 +6,17 @@ import {
     REFRESH_TOKEN,
 }                                   from "./routesApi";
 
-type loginPayload = {
+type LoginPayload = {
     username: string;
     password: string;
     is_author: boolean;
 };
 
+type PostPayload = {
+    title: string,
+    body: string,
+    tags: string[],
+}
 const axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use(
@@ -30,7 +35,11 @@ export const getAllPosts = () => {
     return get(POSTS);
 }
 
-export const sendLogin = (obj: loginPayload) => {
+export const createPost = (payload:PostPayload) => {
+    return post(POSTS, payload);
+}
+
+export const sendLogin = (obj: LoginPayload) => {
     return post(LOGIN, obj);
 }
 export const verifyToken = () => {

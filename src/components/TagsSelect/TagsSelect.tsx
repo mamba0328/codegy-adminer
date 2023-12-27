@@ -12,7 +12,7 @@ function TagsSelect({addTag, tags, deleteTag}:Props) {
 
     const tagsInputRef = useRef(null)
     return (
-        <fieldset className={'pt-5 flex flex-col gap-2 '}>
+        <fieldset className={'pt-5 flex flex-col gap-2 mb-5'}>
             <div className={'flex w-full max-w-[400px] justify-between'}>
                 <input
                     className={'w-full max-w-[290px] border rounded-md p-2'}

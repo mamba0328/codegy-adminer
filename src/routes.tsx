@@ -10,10 +10,10 @@ import Home                         from "./modules/Home/Home";
 import LoginPage                    from "./modules/LoginPage/LoginPage";
 
 //TODO: individual post page and be able:
+//      -delete post
 //      -change status
 //      -change content
 //      -moderate comments
-//TODO: create post
 //FINISH?
 export function AppRouter():ReactNode {
     return (
