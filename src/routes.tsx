@@ -8,6 +8,7 @@ import NewPost                      from "./modules/NewPost/NewPost";
 import Page404                      from "./components/Page404/Page404";
 import Home                         from "./modules/Home/Home";
 import LoginPage                    from "./modules/LoginPage/LoginPage";
+import Post                         from "./modules/Post/Post";
 
 //TODO: individual post page and be able:
 //      -delete post
@@ -40,6 +41,11 @@ function protectedRoutes():ReactNode{
             <Route path={'new-post'} element={
                 <RequireAuth>
                     <NewPost/>
+                </RequireAuth>
+            }/>
+            <Route path={'/post/:postId'} element={
+                <RequireAuth>
+                    <Post/>
                 </RequireAuth>
             }/>
         </>

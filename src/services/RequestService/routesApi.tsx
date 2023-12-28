@@ -1,4 +1,4 @@
-export const API_GLOBAL = 'api';
+export const API_GLOBAL = '/api';
 
 export const USERS = `${API_GLOBAL}/users`
 export const AUTHORS = `${API_GLOBAL}/authors`
