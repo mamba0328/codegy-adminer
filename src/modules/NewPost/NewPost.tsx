@@ -10,11 +10,7 @@ import TagsSelect               from "../../components/TagsSelect/TagsSelect";
 
 import { createPost }           from "../../services/RequestService/RequestsService";
 
-type Post = {
-    title: string,
-    body: string,
-    tags: string[],
-}
+import { PostPayload }          from "../../types/types";
 
 type DeleteFunction = (index: number) => void;
 type SubmitFunction = (e: SyntheticEvent) => void;
@@ -55,7 +51,7 @@ function NewPost():ReactElement {
             setIsLoaded(false);
             e.preventDefault();
 
-            const post:Post = {
+            const post:PostPayload = {
                 title,
                 body,
                 tags

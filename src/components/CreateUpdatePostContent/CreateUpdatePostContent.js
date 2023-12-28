@@ -25,7 +25,7 @@ export default function CreateUpdatePostContent(props) {
                     Post content
                 </label>
                 <BundledEditor
-                    initialValue={initialEditorValue ?? '<h3 style="text-align: center;">Post heading</h3>'}
+                    initialValue={initialEditorValue ?? '<p>I\'m gonna be the very best...</p>'}
                     id={'content'}
                     init={{
                         setup : function(ed){

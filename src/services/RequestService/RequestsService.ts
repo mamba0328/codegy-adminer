@@ -1,10 +1,12 @@
 import axios                        from "axios";
+
 import {
     POSTS,
     LOGIN,
     VERIFY_JWT,
     REFRESH_TOKEN,
 }                                   from "./routesApi";
+import { PostPayload }              from "../../types/types";
 
 type LoginPayload = {
     username: string;
@@ -12,11 +14,7 @@ type LoginPayload = {
     is_author: boolean;
 };
 
-type PostPayload = {
-    title: string,
-    body: string,
-    tags: string[],
-}
+
 const axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use(
@@ -33,6 +31,10 @@ axiosInstance.interceptors.request.use(
 const { get, post, put, delete: del, } = axiosInstance;
 export const getAllPosts = () => {
     return get(POSTS);
+}
+
+export const getSinglePost = (id:string) => {
+    return get(`${POSTS}/${id}`);
 }
 
 export const createPost = (payload:PostPayload) => {
