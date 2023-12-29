@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         'main': 'minmax(200px, 1fr) 4fr',
-      }
+      },
     },
   },
   plugins: [],

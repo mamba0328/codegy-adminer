@@ -9,13 +9,6 @@ import Page404                      from "./components/Page404/Page404";
 import Home                         from "./modules/Home/Home";
 import LoginPage                    from "./modules/LoginPage/LoginPage";
 import Post                         from "./modules/Post/Post";
-
-//TODO: individual post page and be able:
-//      -delete post
-//      -change status
-//      -change content
-//      -moderate comments
-//FINISH?
 export function AppRouter():ReactNode {
     return (
         <Routes>

@@ -14,6 +14,13 @@ export type PostPayload = {
     tags: string[],
 }
 
+export interface EditPostPayload {
+    status?: number,
+    title?: string,
+    body?: string,
+    tags?: string[],
+}
+
 export type Author = {
     username: string,
     _id: string,

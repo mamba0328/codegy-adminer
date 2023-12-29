@@ -6,7 +6,10 @@ import {
     VERIFY_JWT,
     REFRESH_TOKEN,
 }                                   from "./routesApi";
-import { PostPayload }              from "../../types/types";
+import {
+        PostPayload,
+         EditPostPayload,
+        }                           from "../../types/types";
 
 type LoginPayload = {
     username: string;
@@ -39,6 +42,13 @@ export const getSinglePost = (id:string) => {
 
 export const createPost = (payload:PostPayload) => {
     return post(POSTS, payload);
+}
+
+export const editPost = (postId:string, editPostPayload:EditPostPayload) => {
+    return put(`${POSTS}/${postId}`, editPostPayload);
+}
+export const deletePost = (postId:string) => {
+    return del(`${POSTS}/${postId}`);
 }
 
 export const sendLogin = (obj: LoginPayload) => {
