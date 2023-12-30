@@ -19,12 +19,12 @@ import TagsSelect from "../../components/TagsSelect/TagsSelect";
 
 const trashcanImg  = require('../../assets/imgs/trashcan.svg') as string;
 const penImg  = require('../../assets/imgs/pen.svg') as string;
+const backArrowImg  = require('../../assets/imgs/back-arrow.svg') as string;
 
 type DeleteFunction = (index: number) => void;
 type SubmitFunction = (e: SyntheticEvent) => void;
 
 function Post() {
-    //TODO: backIcon from edit mode;
     //TODO: comments
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setPost] = useState({} as Post);
@@ -134,32 +134,29 @@ function Post() {
         }
     }
 
-    if(!isLoaded){
-        return <p>Loading...</p>
-    }
+    function renderPost(){
+        if(isEditMode){
+            return(
+                <form className={'shadow p-5 rounded-xl relative'}>
+                    <button className={'cursor-pointer absolute right-5 top-5'} type={'button'} onClick={() => setIsEditMode(false)}><img src={backArrowImg} className={'w-5'}/></button>
+                    <CreateUpdatePostContent
+                        onTitleChange={(e:SyntheticEvent) => setEditTitle((e.target as HTMLButtonElement).value )}
+                        onEditorChange={(value:string) => setEditBody(value)}
+                        initialEditorValue={post.body}
+                        title={editTitle}
+                    />
+                    <TagsSelect
+                        deleteTag={deleteTag}
+                        addTag={addTag}
+                        tags={editTags}
+                    />
 
-    if(isEditMode){
-        return(
-            <form className={'shadow p-5 rounded-xl'}>
-                <CreateUpdatePostContent
-                    onTitleChange={(e:SyntheticEvent) => setEditTitle((e.target as HTMLButtonElement).value )}
-                    onEditorChange={(value:string) => setEditBody(value)}
-                    initialEditorValue={post.body}
-                    title={editTitle}
-                />
-                <TagsSelect
-                    deleteTag={deleteTag}
-                    addTag={addTag}
-                    tags={editTags}
-                />
+                    <button type={'submit'} onClick={handleSubmit} className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Edit post</button>
+                </form>
+            )
+        }
 
-                <button type={'submit'} onClick={handleSubmit} className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Edit post</button>
-            </form>
-        )
-    }
-
-    return (
-        <section>
+        return (
             <article className={'post'}>
                 <div className={'flex justify-between'}>
                     <div>
@@ -187,7 +184,20 @@ function Post() {
                     {parse(sanitizedHTML)}
                 </div>
             </article>
-        </section>
+        )
+    }
+
+    if(!isLoaded){
+        return <p>Loading...</p>
+    }
+
+
+    return (
+        <>
+            <section>
+                {renderPost()}
+            </section>
+        </>
     );
 }
 
