@@ -11,11 +11,14 @@ import {
     getSinglePost,
     editPost,
     deletePost, createPost,
-} from "../../services/RequestService/RequestsService";
-import {Post, PostPayload} from "../../types/types";
+}                                       from "../../services/RequestService/RequestsService";
+
+import { Post, PostPayload }            from "../../types/types";
 import { POST_STATUS }                  from "../../consts/post-consts";
-import CreateUpdatePostContent from "../../components/CreateUpdatePostContent/CreateUpdatePostContent";
-import TagsSelect from "../../components/TagsSelect/TagsSelect";
+
+import CreateUpdatePostContent          from "../../components/CreateUpdatePostContent/CreateUpdatePostContent";
+import TagsSelect                       from "../../components/TagsSelect/TagsSelect";
+import CommentsAside                    from "../../components/CommentsAside/CommentsAside";
 
 const trashcanImg  = require('../../assets/imgs/trashcan.svg') as string;
 const penImg  = require('../../assets/imgs/pen.svg') as string;
@@ -25,7 +28,7 @@ type DeleteFunction = (index: number) => void;
 type SubmitFunction = (e: SyntheticEvent) => void;
 
 function Post() {
-    //TODO: comments
+    //TODO: likes?
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setPost] = useState({} as Post);
 
@@ -137,7 +140,7 @@ function Post() {
     function renderPost(){
         if(isEditMode){
             return(
-                <form className={'shadow p-5 rounded-xl relative'}>
+                <form className={'shadow p-5 rounded-xl relative  min-desktop:max-w-[700px] w-full'}>
                     <button className={'cursor-pointer absolute right-5 top-5'} type={'button'} onClick={() => setIsEditMode(false)}><img src={backArrowImg} className={'w-5'}/></button>
                     <CreateUpdatePostContent
                         onTitleChange={(e:SyntheticEvent) => setEditTitle((e.target as HTMLButtonElement).value )}
@@ -157,7 +160,7 @@ function Post() {
         }
 
         return (
-            <article className={'post'}>
+            <article className={'post min-desktop:max-w-[700px] w-full'}>
                 <div className={'flex justify-between'}>
                     <div>
                         <button onClick={toggleStatus}>
@@ -194,8 +197,9 @@ function Post() {
 
     return (
         <>
-            <section>
+            <section className={'flex justify-between flex-wrap gap-3 relative'}>
                 {renderPost()}
+                <CommentsAside postId={postId!}/>
             </section>
         </>
     );

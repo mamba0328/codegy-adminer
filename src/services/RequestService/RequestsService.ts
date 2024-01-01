@@ -5,6 +5,7 @@ import {
     LOGIN,
     VERIFY_JWT,
     REFRESH_TOKEN,
+    POSTS_COMMENTS
 }                                   from "./routesApi";
 import {
         PostPayload,
@@ -44,6 +45,13 @@ export const createPost = (payload:PostPayload) => {
     return post(POSTS, payload);
 }
 
+export const getAllComments = () => {
+    return get(POSTS_COMMENTS);
+}
+
+export const getSinglePostsComments = (post_id:string) => {
+    return get(`${POSTS_COMMENTS}/?post_id=${post_id}`);
+}
 export const editPost = (postId:string, editPostPayload:EditPostPayload) => {
     return put(`${POSTS}/${postId}`, editPostPayload);
 }

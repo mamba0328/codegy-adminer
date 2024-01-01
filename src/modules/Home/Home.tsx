@@ -2,6 +2,8 @@ import React, {useState, useEffect, ReactElement} from 'react';
 import { Link }                                   from "react-router-dom";
 
 import { getAllPosts }                            from '../../services/RequestService/RequestsService';
+import { getFormattedDate }                       from "../../helpers/dateHelpers";
+
 import { Post }                                   from "../../types/types";
 
 function Home() {
@@ -57,9 +59,5 @@ function renderPosts(posts:Array<Post>):Array<ReactElement> {
 function removeHTMLTags(html:string):string{
     const regX = /(<([^>]+)>|&[a-zA-Z0-9]+;)/ig;
     return html.replace(regX, "");
-}
-function getFormattedDate(created_at:string):string{
-    const date = new Date(created_at);
-    return [date.getMonth()+1, date.getDate(), date.getFullYear()].join('.') + ' '+ [date.getHours(), date.getMinutes(),].join(':');
 }
 export default Home;

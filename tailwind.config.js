@@ -10,6 +10,13 @@ module.exports = {
       gridTemplateColumns: {
         'main': 'minmax(200px, 1fr) 4fr',
       },
+      screens: {
+        'tablet': '640px',
+
+        'laptop': '1024px',
+
+        'desktop': '1440px',
+      },
     },
   },
   plugins: [],
